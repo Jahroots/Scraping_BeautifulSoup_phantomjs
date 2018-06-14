@@ -1,0 +1,64 @@
+https://hms.lostcut.net/viewtopic.php?id=80
+
+
+
+This information is for those who want to write your own podcast for the site, where all the links are encrypted.
+
+If you have met online flash player uppod.swf
+
+If you see a link to a video or playlist file is encrypted, or has a link to another text file that is encrypted in flashvars ...
+For example, once on stepashka.kom:
+
+<param name="flashvars" value="comment=Stream-video&st=http://www.stepashka.com/engine/classes/flashplayer/video88-1287.txt&pl=4cQoHu0Npl8L81bNpnEDHlQ3H1Ff41XhpIvNVSMdVCM8USGNw1G3VT3h4TYXHWG3HTRXYTbfpTQawArr" />
+or just see what used uppod player, but links to the page and close it is not visible, then you can try to decipher this thing.
+
+Generally, in all cases, obtain a reference to the study - about one formula:
+
+Sniffer (eg, Wireshark or of Charles ) http listen and see what queries and responses are coming;
+Download the Flash Player, decompile (for example, the Flash Decompiler Trillix ) and study how it all happens there.
+In the case of uppod, there are a few tips may facilitate the acquisition of a very real link.
+If a player uppod links are coded, then the hosts of his life and bought the paid version of the player is going to encrypt links. Encryption links each customer who buys the player, his own. Therefore we have to look inside the player, which is used on the resource.
+
+But in fact, if you're lucky and nothing further is not used for encryption and content protection, everything is simple:
+
+Download the uppod.swf;
+decompile;
+We are looking for a script file in the ActionScript player values of two arrays with the names codec_aand codec_b;
+For example, the player http://filmix.net/styles/uppod.swf it will be the type of line:
+
+client.codec_a = new Array("l", "u", "T", "D", "Q", "H", "0", "3", "G", "1", "f", "M", "p", "U", "a", "I", "6", "k", "d", "s", "b", "W", "5", "e", "y", "=");
+client.codec_b = new Array("w", "g", "i", "Z", "c", "R", "z", "v", "x", "n", "N", "2", "8", "J", "X", "t", "9", "V", "7", "4", "B", "m", "Y", "o", "L", "h");
+The player http://st.kset.kz/pl/pl.swf :
+
+client.codec_a = ["m", "T", "u", "p", "L", "n", "M", "6", "Q", "i", "w", "7", "t", "X", "s", "0", "l", "a", "k", "v", "G", "B", "D", "2", "R", "="];
+client.codec_b = ["9", "c", "W", "Z", "I", "H", "J", "e", "V", "o", "y", "z", "d", "N", "b", "4", "U", "Y", "x", "g", "5", "8", "3", "1", "f", "F"];
+This - substitution symbol table. They are, by default, dull text to Base64 encode and change the characters on these tables. Therefore, we can try to decipher the text link or the following script:
+
++  The C ++ the Script
++  PascalScript
+Those. Calling this function with ciphertext, will return normal text:
+DecodeUppodText('XRHzQZe3yMD8Bxn8oCYgDac3Qxl3fmFTOZuL2ZAvDj5Y5jQn5WElfxJzDmts205z50wWDju37aA3SxFgBWwT5mlg7R=z')
+return http://filmix.net/pl/5ab882007f69b75ba04e4eb8364c9ff8/up/Hannibal.txt
+
+In uppod player, if someone will dig, encryption / decryption functions are in class Is. Login verification decryption - function _foo. Although the functions and class names are very similar to obfuscated, so from version to version of the player may be different.
+
+Sony Bravia KDL-32CX523
+2 WendyH 2015.08.15 4:49:15 p.m.
+WendyH
+Just party
+inactive
+Location: Earth
+Joined: 2015.01.09
+Posts: 888
+If no player Uppod values ​​client.codec_a and client.codec_b
+
+If a player Uppod, links are encrypted, but the initialization and anywhere in the source code of the player does not appear, it may be more, and the second variant - encoding using hash functions.client.codec_aclient.codec_b
+
+To do this in the source code decompiled flash player to find:
+
+private var hash:String = "0123456789WGXMHRUZID=NQVBLihbzaclmepsJxdftioYkngryTwuvihv7ec41D6GpBtXx3QJRiN5WwMf=ihngU08IuldVHosTmZz9kYL2bayE";
+Copy the value of this line and use the following functions:
+
++  The C ++ the Script
++  PascalScript
+But, as I have looked into uppod, there always is a hash value was the same.

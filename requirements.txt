@@ -1,0 +1,26 @@
+EasyProcess>=0.1.9
+PyVirtualDisplay>=0.1.5
+argparse>=1.2.1
+beautifulsoup4>=4.4.1
+colorama>=0.3.3
+html5lib>=0.9999999
+logutils>=0.3.3
+lxml>=3.4.4
+Pillow>=3.1.1
+ply>=3.4
+rainbow-logging-handler>=2.2.2
+redis>=2.10.3
+redis-simple-cache>=0.0.8
+requests>=2.8.1
+selenium>=2.48.0
+six>=1.10.0
+slimit>=0.8.1
+wsgiref>=0.1.2
+pycrypto>=2.6.1
+vk==2.0.2
+jsbeautifier==1.6.2
+# Google Chrome
+
+# preventing https://urllib3.readthedocs.io/en/latest/security.html#insecureplatformwarning
+ndg-httpsclient
+PyAMF==0.8.0
